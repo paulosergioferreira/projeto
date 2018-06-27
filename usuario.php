@@ -1,8 +1,10 @@
-<?php
- 
-class Usuario extends Model{
+<?php 
 
-	protected $table = "usuario";
+require_once "model.php";
+ 
+class usuario extends model{
+
+	protected $table = "usu";
     private $id;
     private $nome;
     private $email;
@@ -14,8 +16,9 @@ class Usuario extends Model{
 
     public function insert()
     {
-        //ID LOGIN SENHA NM_USUARIO CPF RG DT_NASCIMENTO NIVEL_USER LOGRADOURO NR_CASA CIDADE UF TELEFONE
-       $stmt = $this->prepare("INSERT INTO $this->table (NOME, EMAIL, SENHA, IDADE, FOTO) VALUES (:NOME, :EMAIL, :SENHA,:IDADE, :FOTO)");
+     
+       $stmt = $this->prepare("INSERT INTO $this->table (NOME, EMAIL, SENHA, IDADE, FOTO) VALUES 
+        (:NOME, :EMAIL, :SENHA,:IDADE,:FOTO)");
        
        $stmt->bindParam(":NOME", $this->nome);
        $stmt->bindParam(":EMAIL", $this->email);
@@ -24,6 +27,31 @@ class Usuario extends Model{
        $stmt->bindParam(":FOTO", $this->foto);
        $stmt->execute();
        $stmt->closeCursor();
+    }
+
+
+    public function delete($id)
+    {
+        $stmt = $this->prepare("DELETE FROM $this->table WHERE id = :ID");
+        $stmt->bindParam(":ID", $id);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
+
+ public function update()
+    {
+        
+        $stmt = $this->prepare("UPDATE $this->table SET NOME = :NOME, EMAIL = :EMAIL, SENHA = :SENHA,
+                                    IDADE = :IDADE, FOTO = :FOTO WHERE id = :ID");
+
+        $stmt->bindParam(":ID", $this->id);
+        $stmt->bindParam(":NOME", $this->nome);
+        $stmt->bindParam(":EMAIL", $this->email);
+        $stmt->bindParam(":SENHA", $this->senha);
+        $stmt->bindParam(":IDADE", $this->idade);
+        $stmt->bindParam(":FOTO", $this->foto);
+        $stmt->execute();
+        $stmt->closeCursor();
     }
 
 

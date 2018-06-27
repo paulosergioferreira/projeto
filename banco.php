@@ -1,9 +1,7 @@
 <?php
- require_once "Model.php"; 
+ require_once "model.php"; 
 
-use PDO, PDOException;
-
-class Banco
+class Banco extends PDOException
 {
 
     public static function getCon(){

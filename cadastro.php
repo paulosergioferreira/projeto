@@ -1,7 +1,8 @@
 <?php 
 
+require_once "usuario.php";
    
-$u = new model\Usuario();
+$u = new Usuario();
 
 $u->setNome(isset($_POST['nome']) ? $_POST['nome'] : null);
 $u->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
@@ -29,7 +30,7 @@ if(isset($_POST['confirmar'])){
 </head>
 <body>
  <div class="container">
-        <form class="form-perfil mt-5 mb-5" action="../viagem/resumo.php" method="post">
+        <form class="form-perfil mt-5 mb-5"  method="post">
             <div class="form-row">
             
                 <div class="form-group col-7">
@@ -57,7 +58,7 @@ if(isset($_POST['confirmar'])){
                     <input type="file" id="foto" name="foto" class="form-control" >
                 </div>
        
-				<button type="submit" class="btn btn-primary" name="confirmar">Confirmar</button>
+				<input type="submit" class="btn btn-primary" name="confirmar" value="Salvar">
 				<a href="login.php" class="btn btn-danger">Voltar</a>
 
 			</div>
